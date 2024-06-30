@@ -16,7 +16,7 @@ public:
         return -1;
     }
 
-    void remove(int key) {
+    void remove() {
         while (!history.empty()) {
             int curr = history.front();
             history.pop();
@@ -34,7 +34,7 @@ public:
         counter[key] ? counter[key] ++ : counter[key] = 1;
         history.push(key);
         if (LRUMap.size() > this->capacity)
-            remove(key);
+            remove();
     }
 };
 
