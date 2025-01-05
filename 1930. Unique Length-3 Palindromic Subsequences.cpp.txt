@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        int first, second, result = 0;
+        map<char, pair<int, int>> charMap;
+        unordered_set<char> betweenChars;
+        for (int i = 0; i < s.size(); i++) {
+            if (charMap.find(s[i]) == charMap.end()) {
+                charMap[s[i]] = {i, -1};
+            } else {
+                charMap[s[i]].second = i;
+            }
+        }
+
+        for (auto& entry : charMap) {
+            first = entry.second.first;
+            second = entry.second.second;
+
+            if (second == -1) {
+                continue;
+            }
+
+            betweenChars.clear();
+           
+            for (int i = first + 1; i < second; i++) {
+                betweenChars.insert(s[i]);
+                if(betweenChars.size() == 26) break;
+            }
+
+            result += betweenChars.size();
+            
+        }
+
+        return result;
+    }
+};
